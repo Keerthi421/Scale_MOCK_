@@ -49,7 +49,12 @@ target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "UP", "B", "C4", "SIM", "ASYNC"]
-ignore = ["B008"]  # FastAPI Depends() in defaults is idiomatic
+ignore = [
+    "B008",  # FastAPI Depends() in argument defaults is idiomatic
+    # `from sqlalchemy.dialects.postgresql import UUID as PgUUID` — the alias
+    # disambiguates the column type from stdlib uuid.UUID, which we also use.
+    "N811",
+]
 
 [tool.mypy]
 python_version = "3.12"

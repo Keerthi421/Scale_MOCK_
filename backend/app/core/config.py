@@ -47,7 +47,11 @@ class Settings(BaseSettings):
     # Optional at boot so the API still starts for contributors who only need
     # auth/problems locally. Services that need them raise a clear error.
     ANTHROPIC_API_KEY: str | None = None
-    ANTHROPIC_MODEL: str = "claude-sonnet-5"
+    ANTHROPIC_MODEL: str = "claude-opus-5"
+    # Effort trades reasoning depth against latency and cost. Interviews run at
+    # "medium" for turn latency; evaluation and design review run at "high".
+    ANTHROPIC_INTERVIEW_EFFORT: str = "medium"
+    ANTHROPIC_EVALUATION_EFFORT: str = "high"
     GOOGLE_CLIENT_ID: str | None = None
     GOOGLE_CLIENT_SECRET: str | None = None
     STRIPE_SECRET_KEY: str | None = None
