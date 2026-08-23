@@ -1,0 +1,121 @@
+@import "tailwindcss";
+@import "@xyflow/react/dist/style.css";
+
+/* InterviewForge design tokens.
+   Graphite ground with a single molten-amber accent — the forge metaphor.
+   Deliberately not the default indigo/violet SaaS palette. */
+@theme {
+  --color-bg: #0d0f12;
+  --color-surface: #14171c;
+  --color-surface-raised: #1b1f26;
+  --color-surface-hover: #22272f;
+  --color-border: #272d36;
+  --color-border-strong: #363e4a;
+
+  --color-text: #e8eaed;
+  --color-text-muted: #9aa3af;
+  --color-text-faint: #6b7280;
+
+  --color-accent: #f0883e;
+  --color-accent-hot: #ff9f4a;
+  --color-accent-dim: #a85a24;
+
+  --color-success: #3fb950;
+  --color-warning: #d29922;
+  --color-danger: #f85149;
+  --color-info: #58a6ff;
+
+  --font-sans: "Inter var", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-lg: 10px;
+}
+
+/* Light theme. The product is dark-first — engineers work in dark editors —
+   but the palette is tokenized so light is a variable swap, not a rewrite. */
+:root[data-theme="light"] {
+  --color-bg: #fbfbfa;
+  --color-surface: #ffffff;
+  --color-surface-raised: #f5f5f4;
+  --color-surface-hover: #ebebe9;
+  --color-border: #e0e0dd;
+  --color-border-strong: #c9c9c5;
+
+  --color-text: #16181d;
+  --color-text-muted: #565b65;
+  --color-text-faint: #8b909a;
+
+  --color-accent: #c2410c;
+  --color-accent-hot: #ea580c;
+  --color-accent-dim: #9a3412;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle engineering-grid backdrop for the canvas. Reads as graph paper
+   rather than decoration. */
+.canvas-grid {
+  background-color: var(--color-bg);
+  background-image:
+    linear-gradient(var(--color-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 1;
+}
+
+/* React Flow overrides so the canvas inherits our tokens instead of its
+   default light theme. */
+.react-flow__edge-path {
+  stroke: var(--color-border-strong);
+  stroke-width: 1.5;
+}
+.react-flow__edge.selected .react-flow__edge-path,
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: var(--color-accent);
+  stroke-width: 2;
+}
+.react-flow__handle {
+  width: 8px;
+  height: 8px;
+  background: var(--color-surface-raised);
+  border: 1.5px solid var(--color-border-strong);
+}
+.react-flow__handle:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+.react-flow__controls-button {
+  background: var(--color-surface-raised);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  fill: currentColor;
+}
+.react-flow__controls-button:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+.react-flow__attribution {
+  background: transparent;
+  color: var(--color-text-faint);
+  font-size: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
